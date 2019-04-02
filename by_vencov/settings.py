@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -26,8 +25,8 @@ SECRET_KEY = '%va4a+q+$dr#-nk%r@sl)&jw)1fk7#l=j4g#uvvtx5$qwaw&5u'
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.101', '192.168.0.102', '192.168.0.100', '192.168.0.103', 'localhost', '127.0.0.1',
-                 'suse-pc', '172.20.10.12', '172.20.10.13']
-
+                 'suse-pc:3000', "http://suse-pc:3000/", "http://suse-pc:3000", 'suse-pc', '172.20.10.12',
+                 '172.20.10.13']
 
 # Application definition
 
@@ -40,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kek',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -52,6 +53,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'by_vencov.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3030','192.168.0.101', '192.168.0.102', '192.168.0.100', '192.168.0.103', 'localhost', '127.0.0.1',
+                 'suse-pc:3000', "http://suse-pc:3000/", "http://suse-pc:3000", 'suse-pc', '172.20.10.12',
+                 '172.20.10.13'
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost:3030',
+)
 
 TEMPLATES = [
     {
@@ -72,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'by_vencov.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -82,7 +93,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -102,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -115,7 +124,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

@@ -38,8 +38,8 @@ def train():
     boston['MEDV'] = boston_dataset.target
     boston.isnull().sum()
 
-    X = pd.DataFrame(np.c_[boston['CRIM'], boston['RM']],
-                     columns=['CRIM','RM'])
+    X = pd.DataFrame(np.c_[boston['LSTAT'], boston['RM'], boston['NOX']],
+                     columns=['LSTAT', 'RM', 'NOX'])
     Y = boston['MEDV']
     # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1, random_state=5)
     lin_model = LinearRegression()
@@ -51,9 +51,10 @@ train()
 
 # in the array the  number of parameters must be as many columns
 def pred(a):
+    print("pred()")
     global lin_model
     if isinstance(lin_model, LinearRegression):
         predicted = lin_model.predict(pd.np.array([a]))
         return predicted[0]
     else:
-        return "XUY"
+        return "-~+"
